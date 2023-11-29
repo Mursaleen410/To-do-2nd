@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-DO List</title>
+    <link rel="stylesheet" href="list.css">
+</head>
+<body>
+    <div class="container">
+        <div class="todo-app">
+            <h2>TO-DO List <img src="pic.png"></h2>
+            <div class="row">
+                <input type="text" id="text-box" placeholder="Add Text">
+                <button onclick="addtast();">ADD</button>
+            </div>
+            <ul id="list-container">
+                <li>Task 1</li>
+                <li>Task 2</li>
+                <li>Task 3</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        const textBox=document.getElementById("text-box");
+const listContainer=document.getElementById("list-container");
+function addtast(){
+    if(textBox.value===''){
+        alert("you must write something");
+    }else{
+        let li=document.createElement('li');
+        li.innerHTML=textBox.value;
+        listContainer.appendChild(li);//appendChild use to attached the text and tag
+        let span=document.createElement('span');
+        span.innerHTML="\u00d7"
+        li. appendChild(span);
+    }
+    textBox.value='';
+    savedata();
+}
+listContainer.addEventListener("click",function(e){
+    if(e.target.tagName==="LI"){
+    }else if(e.target.tagName==="SPAN"){
+        e.target.parentElement.remove();
+        savedata();
+
+    }
+},false);
+function savedata(){
+    localStorage.setItem("Data",listContainer.innerHTML);//use to store thevalue 
+}
+function showtask(){
+    listContainer.innerHTML=localStorage.getItem("data");
+}
+showtask();
+    </script>
+</body>
+
+</html>
